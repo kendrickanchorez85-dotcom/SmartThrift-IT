@@ -1,0 +1,458 @@
+
+     @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Press+Start+2P&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            word-spacing: normal;
+            gap: 10px;
+           
+            
+        }
+
+        body {
+            font-family: 'Press Start 2P', monospace;
+            background: linear-gradient(45deg, #8B4513, #D2691E, #F4A460, #8B4513);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            color: #000;
+            min-height: 100vh;
+            overflow-x: hidden;
+            
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Navigation */
+        .nav {
+            width: 300px;
+            background: linear-gradient(180deg, #2C1810, #1A0F07);
+            padding: 20px;
+            box-shadow: inset -10px 0 30px rgba(0,0,0,0.5);
+            position: fixed;
+            height: 100vh;
+            overflow-y:auto;
+            z-index: 1000;
+        }
+
+        .search-container {
+            margin-bottom: 30px;
+            padding: 15px;
+            background: rgba(255,255,255,0.1);
+            border: 3px solid #FFD700;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255,215,0,0.3);
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 12px;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 10px;
+            background: rgba(255,255,255,0.9);
+            border: 2px solid #000;
+            border-radius: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .filters {
+            margin-top: 30px;
+            display:block;
+            gap: 20px;
+            color: #FFFFFF;
+        }
+
+        .filter-group-size, .filter-group-price {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+            align-items: center;
+        }
+        .filter-group-cate {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .filter-group label {
+            display: block;
+            
+            font-size: 10px;
+            color: #FFD700;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 2px #000;
+        }
+
+        .filter-checkbox {
+            width: 15px;
+            height: 30px;
+            margin-right: 5px;
+            accent-color: #FFD700;
+            transform: scale(1.2);
+            flex-direction: column;
+        }
+        .size, .cate, .price {
+            flex-direction: column;
+             display: flex;
+        }
+
+        /* Nav Links */
+        .nav-links {
+            list-style: none;
+            gap:20px;
+            margin-top:20px;
+        }
+
+
+
+        .nav-links li {
+            margin-bottom: 15px;
+        }
+
+        .nav-links a {
+            display: block;
+            padding: 15px 20px;
+            background: linear-gradient(45deg, rgba(255,215,0,0.2), rgba(255,140,0,0.2));
+            color: #FFD700;
+            text-decoration: none;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border: 2px solid #FFD700;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        .nav-links a:hover::before {
+            left: 100%;
+        }
+
+        .nav-links a:hover {
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            color: #000;
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(255,215,0,0.6);
+        }
+
+        .nav-links a.active {
+            background: linear-gradient(45deg, #FF4500, #FFD700);
+            color: #000;
+            box-shadow: 0 0 20px #FFD700;
+        }
+
+        .cta-button{
+            display: flex;  
+            margin-top:20px;
+            text-decoration: none;
+            cursor:grab;
+            transform: 1.2;
+            transition: 0.3s;
+            font-size: 30px;
+            text-align: center;
+            justify-content: center;
+            margin-right: 100px;
+            margin-top:50px;
+            margin-bottom: 0;
+            
+        }
+
+        .cta-button:hover{
+            transform: scale(1.1);
+            text-decoration: underline;
+
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 300px;
+            flex: 1;
+            padding: 40px;
+            position: relative;
+        }
+
+        /* Page Content */
+        .page {
+            display: none;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        .page.active {
+            display: block;
+        }
+        @keyframes glitch { 
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+        
+
+        .featured, .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 20px 0;
+        }
+
+        .item-card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid #FFD700;
+            padding: 15px;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .item-card:hover {
+            transform: translateY(-50px);
+            background: rgba(255, 215, 0, 0.2);
+        }
+
+        .item-image img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;  
+            border-bottom: 2px solid #FFD700;
+            margin-bottom: 10px;
+        }
+
+        .item-name {
+            font-size: 10px;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .item-price {
+            color: #FFD700;
+            font-weight: bold;
+        }
+
+        /* Container ng buong address page details */
+        .address-card {
+            max-width: 500px;
+            margin: auto;
+            text-align: center;
+            justify-content: center;
+            background: white;
+            height: 570px;
+            border:3px solid rgba(0,0,0,0.5);
+            border-radius: 20px;
+        }
+
+        /*para sa shipping details*/
+        .highlight{
+            padding-top: 10px;
+        }
+
+        /* Styling para sa label text */
+        .address-label {
+            font-size: 12px; 
+            color: #050003; 
+            margin-bottom: 15px;
+            justify-content: center; 
+            
+        }
+
+        /* Styling para sa input/textarea */
+        #addressInput {
+            display: flex;
+            width: 60%;
+            height: 200px; 
+            padding: 15px;
+            background: #000; 
+            color: #FFD700;
+            border: 1px solid #FFD700;
+            font-size: 10px;
+            font-family: inherit; 
+            resize: none; 
+            margin-bottom: 10px;
+            margin-left: 100px;
+
+        }
+
+        /* Styling para sa Save Button */
+        .save-btn {
+            width: 100%; 
+            padding: 15px; 
+            background: #05c3ca; 
+            color: #000; 
+            border-radius: 100px;
+            font-family: 'Press Start 2P'; 
+            font-size: 10px; 
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .save-btn:hover {
+            background: #04a9af; /* Darker shade pag hinover */
+            transform: scale(1.02);
+        }
+
+        /* Styling para sa success message */
+        .status-msg {
+            font-size: 8px; 
+            color: #00FF00; 
+            margin-top: 10px; 
+            display: none; /* Default na nakatago */
+        }
+
+        /* Logic para lumitaw ang active page */
+        .page.active {
+            display: block;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 100px 0;
+            border-bottom: 4px double #FFD700;
+            margin-bottom: 50px;
+        }
+
+        .glitch {
+            font-size: 40px;
+            color: #FFD700;
+            text-shadow: 2px 2px #FF4500;
+            animation: glitch 1s infinite;
+            margin-bottom:20px;
+            
+        }
+        .contact-form{
+            display: flex;
+            width: 450px;
+            background-color: white;
+            height: 600px;
+            border: 3px solid rgba( 255,255,255,0.4 );
+            backdrop-filter: bn-leflur(25px);
+            align-items: center;
+            justify-content: center;
+            margin-left: 250px;
+        
+        }
+        
+        .cart-status{
+            cursor: pointer;
+            padding: 15px;
+            background: #FF4500;
+            color: #fff;
+            text-align: center;
+            border-radius: 8px;
+        }
+        .back-shop-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            margin-bottom: 20px;
+        }
+
+        .product-detail-container {
+            display: flex;
+            gap: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 3px solid #FFD700;
+            padding: 30px;
+            border-radius: 10px;
+            backdrop-filter: blur(1000px);
+        }
+
+        .product-detail-left {
+            flex: 1;
+            max-width: 400px;
+        }
+
+        #detail-image {
+            width: 100%;
+            height: auto;
+            border: 2px solid #FFD700;
+            object-fit: cover;
+        }
+
+        .product-detail-right {
+            flex: 1;
+            color: white;
+        }
+
+        #detail-name {
+            color: #FFD700;
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px #000;
+        }
+
+        #detail-price {
+            color: #FF4500;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .detail-label {
+            font-size: 12px;
+            color: #FFD700;
+            margin-bottom: 10px;
+        }
+
+        #detail-desc {
+            font-size: 10px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .qty-group {
+            margin-bottom: 20px;
+        }
+
+        .qty-group label {
+            font-size: 10px;
+            display: block;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        #detail-qty {
+            font-family:'Press Start 2P', monospace;
+            padding: 5px;
+            width: 60px;
+            font-size: 10px;
+        }
+
+        .add-cart-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+        }
+
+        .add-cart-btn a {
+            background: linear-gradient(45deg, #FF4500, #FFD700);
+            color: #000 ;
+        }
+                
+            

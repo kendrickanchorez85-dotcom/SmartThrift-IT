@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smartthrift IT |  Login & Register</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="icon" type="img/png" href="images/Icon1.png" >
+</head>
+<body>
+
+    <div class="Form-container">
+        <div class="Form-col">
+            <div class="btn-box">
+                <button class="btn btn-1" id="login">Sign In</button>
+                <button class="btn btn-2" id="register">Sign up</button>
+            </div>
+            
+            <form class="form-box login-form">
+                <div class="form-title">
+                    <span>Sign In</span>
+                </div>
+                <div class="Form-input">
+                    <div class="input-box">
+                        <input type="text" class="inputs input-field" placeholder="Username" required>
+                        <ion-icon name="person-outline" class="icon"></ion-icon> 
+                    </div>
+                    <div class="input-box">
+                        <input type="password" oninput="changeIcon(this.value)"  class="inputs input-field" placeholder="Password" required>
+                        <ion-icon name="lock-closed-outline" class="icon" id="log-pass-icon" onclick=""></ion-icon>
+                    </div>
+                    <div class="forgot-pass">
+                        <a href="#">Forgot Password?</a>
+                    </div>
+                    <div class="input-box">
+                        <button class="inputs submit-btn">
+                            <span>Sign In</span>
+                            <ion-icon name="arrow-forward-outline"></ion-icon>
+                        </button>
+                    </div>
+                </div>
+                <div class="social-login">
+                    <a href="https://accounts.google.com" target="_blank">
+                        <div class="social-login-box">
+                            <ion-icon name="logo-google" class="social-login-icon" alt="Google"></ion-icon>
+                        </div>
+                    </a>
+
+                    <a href="https://www.facebook.com/login/" target="_blank">
+                        <div class="social-login-box">
+                            <ion-icon name="logo-facebook" class="social-login-icon" alt="Facebook"></ion-icon>
+                        </div> 
+                    </a>
+
+                    <a href="https://www.instagram.com/accounts/login/?hl=en" target="_blank">
+                        <div class="social-login-box">
+                            <ion-icon name="logo-instagram" class="social-login-icon" alt="Instagram"></ion-icon>
+                        </div>
+                    </a>
+
+                    <a href="https://www.linkedin.com/home" target="_blank">
+                        <div class="social-login-box">
+                            <ion-icon name="logo-linkedin" class="social-login-icon" alt="Linkedin"></ion-icon>
+                        </div>
+                    </a>
+
+                </div>   
+                </div>
+            </form>
+
+            <form class="form-box register-form">
+                <div class="form-title">
+                    <span>Sign Up</span>
+                </div>
+                <div class="Form-input">
+                    <div class="input-box">
+                        <input type="email" class="inputs input-field" placeholder="Email" required>
+                        <ion-icon name="mail-outline" class="icon"></ion-icon> 
+                    </div>
+                    <div class="input-box">
+                        <input type="text" class="inputs input-field" placeholder="Username" required>
+                        <ion-icon name="person-outline" class="icon"></ion-icon> 
+                    </div>
+                    <div class="input-box">
+                        <input type="password" class="inputs input-field" placeholder="Password" required>
+                        <ion-icon name="lock-closed-outline" class="icon"></ion-icon>
+                    </div>
+                    <div class="remember-me">
+                        <input type="checkbox"  id="remember-me-check">
+                          <label for="remember-me-check">Remember me</label>
+                    </div>
+                    <div class="input-box">
+                        <button class="inputs submit-btn">
+                            <span>Sign Up</span>
+                            <ion-icon name="arrow-forward-outline"></ion-icon>
+                        </button>
+                    </div>
+                </div>
+                <div class="social-login">
+                    <div class="social-login-box">
+                        <ion-icon name="logo-google" class="social-login-icon" alt="Google"></ion-icon>
+                    </div>
+                    <div class="social-login-box">
+                        <ion-icon name="logo-facebook" class="social-login-icon" alt="Facebook"></ion-icon>
+                    </div>
+                    <div class="social-login-box">
+                        <ion-icon name="logo-instagram" class="social-login-icon" alt="Instagram"></ion-icon>
+                    </div>
+                    <div class="social-login-box">
+                        <ion-icon name="logo-linkedin" class="social-login-icon" alt="Linkedin"></ion-icon>
+                    </div>
+                </div>   
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="index.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

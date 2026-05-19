@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartThrift IT</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="icon" type="img/png" href="images/Icon1.png" >
+
+</head>
+<body>
+    <div class="container">s
+        <!-- Navigation -->
+        <nav class="nav"> <!--Eto navigation, nandito yung search box sa gedli tapos yung mga checkbox for size, price etc -->
+            <div class="search-container">
+                <input type="text" class="search-box" placeholder="🔍 SEARCH PRE-LOVED TREASURES...">
+            </div>
+            
+            <div class="filters">
+                <div class="size"><label>SIZE</label></div> <!--Nakahiwalay yung div neto para sa baba niya yung mga checkox kasi pangit pag tabi niya -->
+                <div class="filter-group-size">
+                    <input type="checkbox" class="filter-checkbox" id="size-s"> <label for="size-s" style="font-size:10px;">S</label>
+                    <input type="checkbox" class="filter-checkbox" id="size-m"> <label for="size-m" style="font-size:10px;">M</label>
+                    <input type="checkbox" class="filter-checkbox" id="size-l"> <label for="size-l" style="font-size:10px;">L</label>
+                    <input type="checkbox" class="filter-checkbox" id="size-free"> <label for="size-free" style="font-size:10px;">Free Size</label>
+                </div>
+                <div class="cate"><label>CATEGORIES</label></div>
+                <div class="filter-group-cate">
+                    <input type="checkbox" class="filter-checkbox" id="Streetwear"> <label for="Streetwear" style="font-size:10px;">Streetwear</label>
+                    <input type="checkbox" class="filter-checkbox" id="Vintage"> <label for="Vintage" style="font-size:10px;">Vintage</label>
+                    <input type="checkbox" class="filter-checkbox" id="Classic"> <label for="Classic" style="font-size:10px;">Classic</label>
+                </div>  
+                <div class="price"><label>PRICE</label></div>
+                <div class="filter-group-price">
+                    
+                    <input type="checkbox" class="filter-checkbox" id="under20"> <label for="under100" style="font-size:10px;">PHP 100</label>
+                    <input type="checkbox" class="filter-checkbox" id="20-50"> <label for="100+" style="font-size:10px;">PHP 100+</label>
+                </div>
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="#" class="nav-link active" data-page="home">🏠 HOME</a></li>
+                <li><a href="#" class="nav-link" data-page="address">📫 ADDRESS</a></li>
+                <li><a href="#" class="nav-link" data-page="about">ℹ️ ABOUT</a></li>
+                <li><a href="#" class="nav-link" data-page="contact">📧 CONTACT</a></li>
+                
+            </ul>
+            <div class="cart-status" onclick="showCheckout()">🛒 VIEW CART (<span id="cart-count">0</span>)
+            </div>
+        </nav>
+
+        
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Home Page -->
+            <section id="home" class="page active">
+                <div class="hero">
+                    <div class="logo glitch">SmartThrift IT</div> 
+                    <h1>PRE-LOVED FASHION REVIVAL</h1>
+                    <p>
+                        Discover timeless treasures from the past! 
+                        Every piece tells a story and every purchase saves 
+                        quality clothing from being forgotten. 
+                        Shop sustainable, shop streetwear, vintage, shop unique!
+                    </p>
+                    <a href="#gallery" class="cta-button nav-link" data-page="gallery">SHOP NOW</a>
+                </div>
+
+                <div class="featured">
+                    <div class="item-card">
+                        <div class="item-image">
+                            <img src="images/background1.jpg">
+                        </div>
+                        <div class="item-name">Vintage Denim Jacket</div>
+                        <div class="item-price">PHP 28</div>
+                    </div>
+                    <div class="item-card">
+                        <div class="item-image">
+                            <img src="images/Icon1.png">
+                        </div>
+                        <div class="item-name">High Waist Mom Jeans</div>
+                        <div class="item-price">PHP 22</div>
+                    </div>
+                    <div class="item-card">
+                        <div class="item-image">
+                            <img src="images/background1.jpg">
+                        </div>
+                        <div class="item-name">Floral Wrap Dress</div>
+                        <div class="item-price">PHP 35</div>
+                    </div>
+                    <div class="item-card">
+                        <div class="item-image">
+                            <img src="images/Icon1.png">
+                        </div>
+                        <div class="item-name">Leather Ankle Boots</div>
+                        <div class="item-price">PHP 45</div>
+                    </div>
+                </div>
+            </section>  
+
+          
+  
+            </section>
+
+            <!-- Gallery Page -->
+            <section id="gallery" class="page">
+                <h1 style="font-size: 28px; color: #FFD700; text-align: center; margin-bottom: 40px; text-shadow: 3px 3px 0 #000;">GALLERY OF PRE-LOVED TREASURES</h1>
+                <div class="gallery-grid">
+                    <div class="item-card" data-category="Classic" data-size="L" data-size="M" data-size="S">
+                        <div class="item-image">
+                            <img src="images/background1.jpg"> 
+                        </div>
+                        <div class="item-name">90s Oversized Blazer</div>
+                        <div class="item-price">PHP 150</div>
+                    </div>
+                    <div class="item-card" data-category="Classic" data-size="L" data-size="M" data-size="S">
+                        <div class="item-image">
+                            <img src="images/Icon1.png">
+                        </div>
+                        <div class="item-name">Band Tee Classic</div>
+                        <div class="item-price">PHP 200</div>
+                    </div>
+                    <div class="item-card" data-category="Classic" data-size="M" data-size="S">
+                        <div class="item-image">
+                            <img src="images/background1.jpg">
+                        </div>
+                        <div class="item-name">Velvet Mini Dress</div>
+                        <div class="item-price">PHP 180</div>
+                    </div>
+                    <div class="item-card" data-category="Classic" data-size="L" data-size="M" data-size="S">
+                        <div class="item-image">
+                            <img src="images/Icon1.png">
+                        </div>
+                        <div class="item-name">Crossbody Bag</div>
+                        <div class="item-price">PHP 25</div>
+                    </div>
+                    <div class="item-card" data-category="Classic" data-size="L" data-size="M" data-size="S">
+                        <div class="item-image">
+                            <img src="images/background1.jpg">
+                        </div>
+                        <div class="item-name">Platform Boots</div>
+                        <div class="item-price">PHP 38</div>
+                    </div>
+                    <div class="item-card" data-category="Classic" data-size="L" data-size="M" data-size="S">
+                        <div class="item-image">
+                            <img src="images/Icon1.png ">
+                        </div>
+                        <div class="item-name">Roller Skates</div>
+                        <div class="item-price">PHP 55</div>
+                    </div>
+                </div>
+            </section>
+
+            <!--Product views-->
+            <section id="product-view" class="page">
+                <button onclick="goBackToPreviousPage()" class="back-shop-btn">
+                    <span class="nav-links"><a>⬅️ BACK TO SHOP</a></span>
+                </button>
+                
+                <div class="product-detail-container">
+                    <div class="product-detail-left">
+                        <img id="detail-image" src="images/Icon1.png" alt="Product Image">
+                    </div>
+                    <div class="product-detail-right">
+                        <h1 id="detail-name">PRODUCT NAME</h1>
+                        <h2 id="detail-price">PHP 00</h2>
+                        
+                        <p class="detail-label">DESCRIPTION:</p>
+                        <p id="detail-desc">Product description will appear here.</p>
+                        
+                        <div class="qty-group">
+                            <label>QUANTITY:</label>
+                            <input type="number" id="detail-qty" value="1" min="1">
+                        </div>
+                        
+                        <button id="add-to-cart-action" class="add-cart-btn">
+                            <span class="nav-links"><a>🛒 ADD TO CART</a></span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+            
+            <!---Address Page--->
+              <section id="address" class="page">
+                <div class="address-card">
+                    <h1 class="highlight">Shipping Details</h1>
+                    <br>
+                    <p class="address-label">SET YOUR DELIVERY ADDRESS:</p>
+                    
+                    <textarea id="addressInput" placeholder="Enter your complete address (House No., Street, Brgy, City)..."></textarea>
+                    
+                    <button onclick="saveAddress()" class="save-btn">
+                        SAVE ADDRESS📩  
+                    </button>
+                    
+                    <p id="saveStatus" class="status-msg">✅ Address saved successfully!</p>
+                </div>
+            </section>
+
+            <!-- About Page -->
+            <section id="about" class="page">
+                <div class="about-content">
+                    <h2 class="logo glitch">OUR STORY</h2>
+                    <p style="font-size: 14px; margin-bottom: 30px;">
+                        SmartThrift IT was made by four people from BSIT1-4. They want to create a website
+                        that sells pre-loved clothes while sellers and customers dont have to bother going
+                        out. Their idea comes to live and as a result , they created this website.
+                    </p>
+                    
+                    <h2>WHY PRE-LOVED?</h2><br>
+                    <p style="font-size: 12px; margin-bottom: 30px;">
+                        - <strong>SUSTAINABLE:</strong> Keep clothes out of landfills<br><br>
+                        - <strong>UNIQUE:</strong> One-of-a-kind vintage finds<br><br>
+                        - <strong>AFFORDABLE:</strong> Designer quality at fraction of price<br><br>
+                        - <strong>TIMELESS:</strong> Styles that never go out of fashion
+                    </p>
+                    
+                    <h2>OUR PROMISE</h2>
+                    <p style="font-size: 12px;">
+                        We promised to provide you a quality pre loved clothes while
+                        meeting your budget and style. We also promised to provide you a good customer service.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Contact Page -->
+            <section id="contact" class="page">
+                <h1 style="font-size: 28px; color: #FFD700; text-align: center; margin-bottom: 40px; text-shadow: 3px 3px 0 #000;">GET IN TOUCH</h1>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label>YOUR NAME:</label>
+                        <input type="text" required>
+                    </div>
+                    <div class="form-group">
+                        <label>EMAIL ADDRESS:</label>
+                        <input type="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>MESSAGE:</label>
+                        <textarea placeholder="Tell us what you're looking for..." required></textarea>
+                    </div>
+                    <div style="text-align: center;">
+                        <button type="submit" class="cta-button" style="font-size: 12px; padding: 18px 35px;">SEND MESSAGE</button>
+                    </div>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
