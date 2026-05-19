@@ -1,1 +1,0 @@
-# SmartThrift-IT
