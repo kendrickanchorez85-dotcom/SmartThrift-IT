@@ -13,10 +13,11 @@
 
         body {
             font-family: 'Press Start 2P', monospace;
-            background: linear-gradient(45deg, #8B4513, #D2691E, #F4A460, #8B4513);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
+            background: url(images/download.jfif);
+            background-size: 100% 100%;
             color: #000;
+            background-repeat: no-repeat;
+            background-position: right;
             min-height: 100vh;
             overflow-x: hidden;
             
@@ -346,15 +347,14 @@
         }
         .contact-form{
             display: flex;
-            width: 450px;
+            width: auto;
             background-color: white;
-            height: 600px;
+            height: 430px;
             border: 3px solid rgba( 255,255,255,0.4 );
             backdrop-filter: bn-leflur(25px);
             align-items: center;
             justify-content: center;
-            margin-left: 250px;
-        
+            margin-left: 0;
         }
         
         .cart-status{
@@ -454,5 +454,119 @@
             background: linear-gradient(45deg, #FF4500, #FFD700);
             color: #000 ;
         }
-                
-            
+        .firsth1 {
+         color: #FFFFFF;
+        }
+        .arcade-card {
+        background: #726e6e;
+        border: 4px solid #000;
+        box-shadow: 8px 8px 0px #000; /* Flat retro shadow */
+        padding: 30px;
+        margin-bottom: 20px;
+        
+        }
+        .input-group { 
+        margin-bottom: 20px; 
+        }
+
+        label { 
+        display: block; 
+        font-size: 10px; 
+        margin-bottom: 8px; 
+        }
+
+        input, textarea {
+        width: 100%;
+        border: 4px solid #000;
+        padding: 10px;
+        font-family: 'Press Start 2P', cursive;
+        font-size: 10px;
+        box-sizing: border-box;
+    }
+        .contactbut {
+        background: #00ff41; /* Neon green */
+        border: 4px solid #000;
+        padding: 15px;
+        font-family: 'Press Start 2P', cursive;
+        cursor: pointer;
+        width: 100%;
+        box-shadow: 4px 4px 0px #000;
+        }
+        .contactbut:active{
+        box-shadow: 0px 0px 0px #000;
+        transform: translate(4px, 4px);
+        }
+
+        /* --- CHECKOUT PAGE STYLING --- */
+
+        /* Ito yung box na naglalaman ng lahat ng items sa checkout */
+        .cart-container {
+            background: rgba(0, 0, 0, 0.8); 
+            border: 4px solid #FFD700;   
+            padding: 20px;  
+            border-radius: 0;             
+            margin: 20px 0;
+            max-height: 400px;
+            overflow-y: auto;           
+        }
+
+        /* Style ng bawat item sa loob ng cart list */
+        .cart-item-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            border-bottom: 2px dashed #444; 
+            color: #fff;
+            font-size: 12px;               
+            margin-bottom: 5px;
+        }
+
+       
+        .checkout-summary {
+            background: #1a1a1a;
+            border: 2px solid #FFD700;
+            padding: 20px;
+            margin-top: 10px;
+            text-align: left;
+        }
+
+        .summary-text {
+            color: #bbb;
+            font-size: 10px;
+            margin-bottom: 10px;
+        }
+
+        .address-val {
+            color: #FFD700;
+            text-transform: uppercase; 
+        }
+
+        .total-price {
+            font-size: 18px;
+            color: #fff;
+            margin: 20px 0;
+            border-top: 2px solid #FFD700;
+            padding-top: 10px;
+        }
+
+        /* Ang Checkout Button */
+        .checkout-btn {
+            background-color: #FFD700;
+            color: #000;
+            border: none;
+            padding: 15px;
+            width: 100%;
+            font-family: 'Press Start 2P', cursive; /* Gamit ang font mo */
+            font-size: 12px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .checkout-btn:hover {
+            background-color: #fff;
+            transform: scale(1.02); /* Lalaki ng konti pag tinapat ang mouse */
+        }
+
+        .footer{
+            padding:10px;
+        }

@@ -1,12 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Press+Start+2P&display=swap');
+
+
 *{
     margin:0;
     padding:0;
     box-sizing: border-box;
-    font-family: 'Poppins',san-serif;
+    font-family: 'Press Start 2P', monospace;
 }
 
 body{
-    background: url('images/background1.jpg');
+    background: url('images/LOGINBG.jfif');
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;

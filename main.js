@@ -1,171 +1,162 @@
-// Navigation functionality
+// --- 1. DATABASE & STATE ---
+const productDescriptions = {
+    "Knitted 1/4 Zip Sweater": "A classic 90s style denim jacket. Perfectly faded, durable denim that adds an effortless cool edge to any outfit.",
+    "Forever 21 Men Baggy Jeans": "Comfortable and retro high-waisted denim jeans. Tailored beautifully to hug the waist while staying relaxed through the legs.",
+    "Lacoste Women Top": "Charming and lightweight summer wrap dress featuring a vibrant floral pattern. Perfect for sunny casual dates.",
+    "Fit Denim Women Jeans": "Edgy black leather ankle boots with sturdy heels. Adds instant attitude and vintage grit to your wardrobe.",
+    "Harley Davidson T-Shirt": "Authentic feel vintage band tee. Soft, breathable cotton with iconic front graphics.",
+    "90's Baggy Jeans": "Power dressing at its finest. Structured shoulders and premium fabric for that ultimate retro boss-look.",
+    "H&M Loose Fit Jagger": "Sleek, stylish, and perfect for retro-themed night outs.",
+    "Nike Track Pants": "Retro quad roller skates in pristine condition. Fun, active, and perfectly nostalgic.",
+    "White Stag Tank Top": "Comfortable and stylish vintage tank top.",
+    "Denim Womens Jacket": "Classic denim jacket for women.",
+    "Worthington Button Down Shirt": "Professional yet vintage style button-down.",
+    "Tropical Beige Shorts Women": "Perfect for summer or beach trips.",
+    "Women's Trousers": "Classic streetwear trousers for women.",
+    "Universal Thread Short": "Simple and durable shorts for daily use."
+};
+
+let myCart = [];
+let previousPage = 'home';
+
+// --- 2. NAVIGATION LOGIC ---
+function showPage(pageId) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+
+    const targetPage = document.getElementById(pageId);
+    if (targetPage) {
+        targetPage.classList.add('active');
+        // I-update ang nav link highlighting
         document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                
-                // Remove active class from all links and pages
-                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-                document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-                
-                // Add active class to clicked link
-                link.classList.add('active');
-                
-                // Show corresponding page
-                const targetPage = link.getAttribute('data-page');
-                document.getElementById(targetPage).classList.add('active');
-            });
+            if (link.getAttribute('data-page') === pageId) link.classList.add('active');
         });
+    }
+}
 
-        // Form submission
-        document.querySelector('.contact-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert('✨ Thanks for reaching out! We\'ll get back to you soon! ✨');
-            e.target.reset();
-        });
+document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = link.getAttribute('data-page');
+        showPage(target);
+    });
+});
 
-        // Search functionality (basic)
-        document.querySelector('.search-box').addEventListener('input', (e) => {
-            const searchTerm = e.target.value.toLowerCase();
-            console.log('Searching for:', searchTerm);
-            
-        });
+// --- 3. PRODUCT VIEW & MODAL LOGIC ---
+document.querySelectorAll('.item-card').forEach(card => {
+    card.addEventListener('click', () => {
+        const activePage = document.querySelector('.page.active');
+        if (activePage && activePage.id !== 'product-view') previousPage = activePage.id;
 
-        document.querySelectorAll('.filter-checkbox').forEach(checkbox => {
-            checkbox.addEventListener('change', (e) => {
-                console.log(`${e.target.id} is now ${e.target.checked ? 'checked' : 'unchecked'}`);
-            });
-        });
+        const itemName = card.querySelector('.item-name').innerText;
+        const itemPrice = card.querySelector('.item-price').innerText;
+        const itemImgSrc = card.querySelector('.item-image img').src;
 
+        document.getElementById('detail-name').innerText = itemName;
+        document.getElementById('detail-price').innerText = itemPrice;
+        document.getElementById('detail-image').src = itemImgSrc;
+        document.getElementById('detail-desc').innerText = productDescriptions[itemName] || "Exclusive pre-loved item.";
+        document.getElementById('detail-qty').value = 1;
 
+        showPage('product-view');
+    });
+});
+
+function goBackToPreviousPage() {
+    showPage(previousPage);
+}
+
+// --- 4. FILTERING LOGIC (SEARCH, SIZE, CATEGORY, PRICE) ---
+function filterProducts() {
+    const searchTerm = document.querySelector('.search-box').value.toLowerCase();
+    const activeSizes = Array.from(document.querySelectorAll('.filter-group-size .filter-checkbox:checked')).map(cb => cb.id.replace('size-', ''));
+    const activeCategories = Array.from(document.querySelectorAll('.filter-group-cate .filter-checkbox:checked')).map(cb => cb.id);
+    
+    const isBelow100Checked = document.getElementById('min-price').checked;
+    const isAbove100Checked = document.getElementById('max-price').checked;
+
+    document.querySelectorAll('.item-card').forEach(card => {
+        const name = card.querySelector('.item-name').innerText.toLowerCase();
+        const price = parseFloat(card.getAttribute('data-price')) || 0;
+        const itemSizes = card.getAttribute('data-size') ? card.getAttribute('data-size').split(' ') : [];
+        const itemCategories = card.getAttribute('data-category') ? card.getAttribute('data-category').split(' ') : [];
+
+        const matchesSearch = name.includes(searchTerm);
+        const matchesSize = activeSizes.length === 0 || activeSizes.some(s => itemSizes.includes(s));
+        const matchesCategory = activeCategories.length === 0 || activeCategories.some(c => itemCategories.includes(c));
         
+        // Price Filter Logic
+        let matchesPrice = true;
+        if (isBelow100Checked && !isAbove100Checked) matchesPrice = price < 100;
+        else if (!isBelow100Checked && isAbove100Checked) matchesPrice = price >= 100;
+        else if (isBelow100Checked && isAbove100Checked) matchesPrice = true; // Parehong naka-check, ipakita lahat
 
-        //user first destination
-        let previousPage = 'home';
+        card.style.display = (matchesSearch && matchesSize && matchesCategory && matchesPrice) ? "block" : "none";
+    });
+}
 
-        //Datebase: description 
-        const productDescriptions = {
-            "Vintage Denim Jacket": "A classic 90s style denim jacket. Perfectly faded, durable denim that adds an effortless cool edge to any outfit.",
-            "High Waist Mom Jeans": "Comfortable and retro high-waisted denim jeans. Tailored beautifully to hug the waist while staying relaxed through the legs.",
-            "Floral Wrap Dress": "Charming and lightweight summer wrap dress featuring a vibrant floral pattern. Perfect for sunny casual dates.",
-            "Leather Ankle Boots": "Edgy black leather ankle boots with sturdy heels. Adds instant attitude and vintage grit to your wardrobe.",
-            "90s Oversized Blazer": "Power dressing at its finest. Structured shoulders and premium fabric for that ultimate retro boss-look.",
-            "Band Tee Classic": "Authentic feel vintage band tee. Soft, breathable cotton with iconic front graphics.",
-            "Velvet Mini Dress": "Luxurious soft velvet dress. Sleek, stylish, and perfect for retro-themed night outs.",
-            "Crossbody Bag": "Compact yet spacious vintage leather crossbody bag to secure all your daily essentials.",
-            "Platform Boots": "Take your style to new heights. Chunky platforms that deliver maximum comfort and 90s alternative vibe.",
-            "Roller Skates": "Retro quad roller skates in pristine condition. Fun, active, and perfectly nostalgic."
-        };
+// Event Listeners for Filters
+document.querySelector('.search-box').addEventListener('input', filterProducts);
+document.querySelectorAll('.filter-checkbox').forEach(cb => cb.addEventListener('change', filterProducts));
 
-        // Bagong Click Event para sa lahat ng Item Cards (sa Home at Gallery)
-        document.querySelectorAll('.item-card').forEach(card => {
-            card.style.cursor = 'pointer'; // Ginawang pointer para alam ng user na iki-click
-            
-            card.addEventListener('click', () => {
-                // 1. Alamin kung anong page ang kasalukuyang bukas bago lumipat (Home o Gallery)
-                const activePageSection = document.querySelector('.page.active');
-                if (activePageSection && activePageSection.id !== 'product-view') {
-                    previousPage = activePageSection.id;
-                }
+// --- 5. CART & CHECKOUT LOGIC ---
+document.getElementById('add-to-cart-action').addEventListener('click', () => {
+    const name = document.getElementById('detail-name').innerText;
+    const price = parseInt(document.getElementById('detail-price').innerText.replace("PHP ", ""));
+    const qty = parseInt(document.getElementById('detail-qty').value);
 
-                // 2. Kunin ang detalye mula sa card na pinindot
-                const itemName = card.querySelector('.item-name').innerText;
-                const itemPrice = card.querySelector('.item-price').innerText;
-                const itemImgSrc = card.querySelector('.item-image img').src;
+    myCart.push({ itemName: name, itemPrice: price, itemQty: qty });
+    document.getElementById('cart-count').innerText = myCart.length;
+    alert("ITEM ADDED TO INVENTORY! 🎒");
+    showPage('gallery');
+});
 
-                // 3. I-pasa ang detalye sa ating Product View Section sa HTML
-                document.getElementById('detail-name').innerText = itemName;
-                document.getElementById('detail-price').innerText = itemPrice;
-                document.getElementById('detail-image').src = itemImgSrc;
-                
-                
-                const description = productDescriptions[itemName] || "Exclusive pre-loved item. Limited edition for your sustainable style collection.";
-                document.getElementById('detail-desc').innerText = description;
-                
-                
-                document.getElementById('detail-qty').value = 1;
+function showCheckout() {
+    const listahan = document.getElementById('cart-list');
+    const totalDisplay = document.getElementById('display-total');
+    const addrDisplay = document.getElementById('display-address');
 
-                    
-                document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-                document.getElementById('product-view').classList.add('active');
-                
-                
-                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-            });
-        });
+    addrDisplay.innerText = localStorage.getItem("userAddress") || "PLEASE SET ADDRESS IN PROFILE";
+    listahan.innerHTML = "";
+    let subtotal = 0;
 
-        
-        function goBackToPreviousPage() {
-            
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            
-            
-            document.getElementById(previousPage).classList.add('active');
-            
-            
-            document.querySelectorAll('.nav-link').forEach(link => {
-                if (link.getAttribute('data-page') === previousPage) {
-                    link.classList.add('active');
-                }
-            });
-        }
+    myCart.forEach((item, index) => {
+        const row = document.createElement('div');
+        row.className = 'cart-item-row';
+        row.style.display = 'flex';
+        row.style.justifyContent = 'space-between';
+        row.innerHTML = `
+            <span>${item.itemQty}x ${item.itemName}</span>
+            <span>PHP ${item.itemPrice * item.itemQty}</span>
+        `;
+        listahan.appendChild(row);
+        subtotal += (item.itemPrice * item.itemQty);
+    });
 
-        // Logic para sa Add to Cart button sa loob ng product view
-        document.getElementById('add-to-cart-action').addEventListener('click', (e) => {
-            e.preventDefault();
-            const qty = document.getElementById('detail-qty').value;
-            const name = document.getElementById('detail-name').innerText;
-            
-            alert(`🛍️ Success! Added ${qty}x [${name}] to your cart!`);
-            
-            // I-update ang cart count badge sa navigation niyo sa tabi
-            const cartCountSpan = document.getElementById('cart-count');
-            if (cartCountSpan) {
-                let currentCount = parseInt(cartCountSpan.innerText) || 0;
-                cartCountSpan.innerText = currentCount + parseInt(qty);
-            }
-            
-            
-            goBackToPreviousPage();
-        });
+    const finalTotal = subtotal > 0 ? subtotal + 50 : 0;
+    totalDisplay.innerText = "TOTAL: PHP " + finalTotal;
+    showPage('checkout');
+}
 
+function confirmOrder() {
+    if (myCart.length === 0) return alert("Your bag is empty!");
+    alert("🚀 THANK YOU FOR BUYING! Your items are being prepared.");
+    myCart = [];
+    document.getElementById('cart-count').innerText = "0";
+    showPage('home');
+}
 
+// --- 6. ADDRESS STORAGE ---
+function saveAddress() {
+    const addr = document.getElementById('addressInput').value;
+    if (!addr.trim()) return alert("Pakisulat ang address!");
+    
+    localStorage.setItem("userAddress", addr);
+    document.getElementById('saveStatus').style.display = "block";
+    setTimeout(() => document.getElementById('saveStatus').style.display = "none", 3000);
+}
 
-
-        // 1. Function para i-save ang Address
-        function saveAddress() {
-            // Kunin ang value mula sa textarea gamit ang ID nito
-            const addressField = document.getElementById('addressInput');
-            const addressValue = addressField.value;
-
-            // Check kung walang laman ang input
-            if (addressValue.trim() === "") {
-                alert("Oops! Pakisulat ang iyong address bago i-save.  thrift it!  thrift it! 👕");
-                return;
-            }
-
-            // I-save sa LocalStorage para kahit i-refresh ang page, nandoon pa rin
-            localStorage.setItem("userAddress", addressValue);
-
-            // Ipakita ang success message (yung green text)
-            const statusMsg = document.getElementById('saveStatus');
-            statusMsg.style.display = "block";
-
-            // Mawawala ang message pagkatapos ng 3 segundo
-            setTimeout(() => {
-                statusMsg.style.display = "none";
-            }, 3000);
-
-            // Optional: Maglagay ng alert para sure na alam ng user
-            alert("Address Saved! 🏠");
-        }
-
-        // 2. Function para i-load ang address tuwing bubuksan ang page
-        // Mahalaga ito para hindi magmukhang nawala ang sinulat nila
-        window.addEventListener('load', () => {
-            const savedAddress = localStorage.getItem("userAddress");
-            const addressField = document.getElementById('addressInput');
-
-            if (savedAddress && addressField) {
-                addressField.value = savedAddress;
-            }
-        });
+window.addEventListener('load', () => {
+    const saved = localStorage.getItem("userAddress");
+    if (saved) document.getElementById('addressInput').value = saved;
+}); 
